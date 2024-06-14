@@ -90,6 +90,24 @@ app.post("/login",(req,res)=>{
         
     })
 
+    app.post("/search",(req,res)=>{
+        const input = req.body
+        employeemodel.find(input).then(
+            (data)=>{
+                res.json(data)
+                
+    
+            }
+        ).catch(
+            (error)=>{
+                res.json(error)
+            }
+        )
+        
+    
+    
+    })
+
 
 
 app.listen(8088,()=>{
