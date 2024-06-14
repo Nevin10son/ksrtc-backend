@@ -26,7 +26,7 @@ app.post("/signup",async(req,res)=>{
     console.log(hashedPassword)
     let user = new usermodel(input)
     user.save()
-    res.json({"status":"success"})
+    res.json({Status:"success"})
     
 })
 
@@ -44,18 +44,18 @@ app.post("/login",(req,res)=>{
                             jwt.sign({email:input.email},"blog-app",{expiresIn:"1d"},
                                 (error,token)=>{
                                 if (error) {
-                                    res.json({"status":"unable to create token"})
+                                    res.json({Status:"unable to create token"})
                                 } else {
-                                    res.json({"status":"success","userid":response[0]._id,"token":token})
+                                    res.json({Status:"success","userid":response[0]._id,"token":token})
                                 }
                             })
                         } else {
-                            res.json({"status":"incorrect password"})
+                            res.json({Status:"incorrect password"})
                         }
                     })
                 }
             else{
-                res.json({"status":"user not found"})
+                res.json({Status:"user not found"})
             }
         }
     )
@@ -65,7 +65,7 @@ app.post("/login",(req,res)=>{
         let token = req.headers["token"]
         jwt.verify(token,"blog-app",(error,decoded)=>{
             if (error) {
-                res.json({"status":"unauthorized access"})
+                res.json({Status:"unauthorized access"})
             } else {
                 if(decoded)
                     {
@@ -80,7 +80,15 @@ app.post("/login",(req,res)=>{
         
     })
     
+    app.post("/add",(req,res)=>{
+        const input = req.body
+        const employee = new employeemodel(input)
+        employee.save()
+        console.log(employee)
+        res.json({status:"success"})
     
+        
+    })
 
 
 
