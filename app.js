@@ -108,7 +108,20 @@ app.post("/login",(req,res)=>{
     
     })
 
-
+    app.post("/delete",(req,res)=>{
+        let input = req.body
+        employeemodel.findByIdAndDelete(input._id).then(
+            (response)=>{
+                
+                
+                res.json({Status:"success"})
+            }
+        ).catch(
+            (error)=>{
+                res.json(error)
+            }
+        )
+    })
 
 app.listen(8088,()=>{
     console.log("server started")
